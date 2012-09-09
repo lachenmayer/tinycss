@@ -183,6 +183,15 @@ class Declaration(object):
                 ' {0.name}: {1}{2}>'.format(
                     self, self.value.as_css(), priority))
 
+    def __eq__(self, other):
+        if not (type(other) is type(self)):
+            return False
+        return self.name == other.name and \
+               self.value.as_css() == other.value.as_css()
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
 
 class PageRule(object):
     """A parsed CSS 2.1 @page rule.

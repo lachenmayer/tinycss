@@ -350,3 +350,20 @@ def test_at_media(css_source, expected_rules, expected_errors):
         for rule in stylesheet.rules
     ]
     assert result == expected_rules
+
+def test_eq():
+    css_source = """
+.class1 {
+    margin: 10px;
+    padding: 20px;
+}
+.class2 {
+    margin: 10px;
+    padding: 20px;
+}
+    """
+    stylesheet = CSS21Parser().parse_stylesheet(css_source)
+    assert stylesheet.rules[0].selector != stylesheet.rules[1].selector
+    assert stylesheet.rules[0].declarations[0] == stylesheet.rules[1].declarations[0]
+    assert stylesheet.rules[0].declarations == stylesheet.rules[1].declarations
+    assert stylesheet.rules[0].declarations[0] != stylesheet.rules[1].declarations[1]
