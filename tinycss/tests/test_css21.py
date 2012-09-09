@@ -365,5 +365,5 @@ def test_eq():
     stylesheet = CSS21Parser().parse_stylesheet(css_source)
     assert stylesheet.rules[0].selector != stylesheet.rules[1].selector
     assert stylesheet.rules[0].declarations[0] == stylesheet.rules[1].declarations[0]
-    assert stylesheet.rules[0].declarations == stylesheet.rules[1].declarations
+    assert set(stylesheet.rules[0].declarations) == set(stylesheet.rules[1].declarations)
     assert stylesheet.rules[0].declarations[0] != stylesheet.rules[1].declarations[1]

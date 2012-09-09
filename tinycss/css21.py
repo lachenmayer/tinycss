@@ -183,11 +183,16 @@ class Declaration(object):
                 ' {0.name}: {1}{2}>'.format(
                     self, self.value.as_css(), priority))
 
+    def __key(self):
+        return (self.name, self.value.as_css(), self.priority)
+
+    def __hash__(self):
+        return hash(self.__key())
+
     def __eq__(self, other):
         if not (type(other) is type(self)):
             return False
-        return self.name == other.name and \
-               self.value.as_css() == other.value.as_css()
+        return self.__key() == other.__key()
 
     def __ne__(self, other):
         return not self.__eq__(other)
